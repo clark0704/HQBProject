@@ -6,6 +6,7 @@ import IconScreen from "../IconScreen";
 import ListItemScreen from "../ListItemScreen";
 import SocialIconScreen from "../SocialIconScreen";
 import homeScreen from "./homeScreen";
+import Images from "../../theme/Images";
 
 
 export const tab = createBottomTabNavigator({
@@ -15,7 +16,7 @@ export const tab = createBottomTabNavigator({
                     tabBarLabel: '首页',
                     tabBarIcon: ({tintColor}) => (
                         <Image
-                            source={require('../../img/ic_tab_home_normal.png')}
+                            source={Images.tab_home}
                             style={{height: 24, width: 24, tintColor: tintColor}}
                         />
                     ),
@@ -29,7 +30,7 @@ export const tab = createBottomTabNavigator({
                     tabBarLabel: '投资',
                     tabBarIcon: ({tintColor}) => (
                         <Image
-                            source={require('../../img/ic_tab_lists_normal.png')}
+                            source={Images.tab_invest}
                             style={{height: 24, width: 24, tintColor: tintColor}}
                         />),
 
@@ -44,7 +45,7 @@ export const tab = createBottomTabNavigator({
                         navigation.getParam('badge', 0) !== 0  ? <View style={style.container}>
 
                             <Image
-                                source={require("../../img/ic_tab_discovery_normal.png")}
+                                source={Images.tab_discovery}
                                 style={{alignSelf: 'center', width: 24, height: 24, tintColor: tintColor}}
                             />
                             <View style={style.corner}>
@@ -52,7 +53,7 @@ export const tab = createBottomTabNavigator({
                             </View>
 
                         </View> :   <Image
-                            source={require("../../img/ic_tab_discovery_normal.png")}
+                            source={Images.tab_discovery}
                             style={{alignSelf: 'center', width: 24, height: 24, tintColor: tintColor}}
                         />                    ),
                 }
@@ -64,7 +65,7 @@ export const tab = createBottomTabNavigator({
                     tabBarLabel: '钱包',
                     tabBarIcon: ({tintColor}) => (
                         <Image
-                            source={require('../../img/ic_tab_account_normal.png')}
+                            source={Images.tab_account}
                             style={[{height: 24, width: 24}, {tintColor: tintColor}]}
                         />)
                 }
@@ -76,7 +77,7 @@ export const tab = createBottomTabNavigator({
                     tabBarLabel: '我的',
                     tabBarIcon: ({tintColor}) => (
                         <Image
-                            source={require('../../img/ic_tab_mine_normal.png')}
+                            source={Images.tab_mine}
                             style={[{height: 24, width: 24}, {tintColor: tintColor}]}
                         />),
                 }

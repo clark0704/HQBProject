@@ -8,5 +8,10 @@ export const styleSheet = StyleSheet.create({
         alignItems:"center",
         width:deviceWidth,
         height:deviceHeight,
-    }
-})
+    },
+    loading: {
+        height: deviceHeight,
+        width: deviceWidth,
+        resizeMode:"stretch"
+    },
+});

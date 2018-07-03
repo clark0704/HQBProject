@@ -11,20 +11,20 @@ import ButtonScreen from "./screens/ButtonScreen";
 import SwiperScreen from "./screens/SwiperScreen";
 import ButtonGroupScreen from "./screens/ButtonGroupScreen";
 import CheckBoxScreen from "./screens/CheckBoxScreen";
-import InputScreen from "./screens/InputScreen";
 import {tab} from "./screens/tab/tab";
+import LoadingScreen from "./screens/LoadingScreen";
 
 const RootStack = createStackNavigator({
     ButtonScreen:{screen:ButtonScreen},
     SwiperScreen:{screen:SwiperScreen},
     ButtonGroupScreen:{screen:ButtonGroupScreen},
     CheckBoxScreen:{screen:CheckBoxScreen},
-    InputScreen:{screen:InputScreen},
-    tab:{screen:tab}
+    tab:{screen:tab},
+    LoadingScreen:{screen:LoadingScreen},
 },{
-    initialRouteName: 'tab',
+    initialRouteName: 'LoadingScreen',
     mode: 'modal',
-    headerMode: 'none',
+    headerMode: 'none',//不要标题
 });
 
 

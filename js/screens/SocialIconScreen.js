@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StatusBar, Text, View} from 'react-native';
+import {StatusBar} from 'react-native';
 import {Card, SocialIcon} from "react-native-elements";
 import {deviceHeight, deviceWidth} from "../utils/DeviceUtils";
 
