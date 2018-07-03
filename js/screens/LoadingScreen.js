@@ -5,6 +5,7 @@ import Images from "../theme/Images";
 
 
 export default class LoadingScreen extends React.Component{
+
     render(){
         return <Image
             source={Images.loading}
