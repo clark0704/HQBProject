@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 
-import {styleSheet} from "../theme/Style"
+import {styleSheet} from "../utils/Style"
 import {Icon} from 'react-native-elements';
 
 

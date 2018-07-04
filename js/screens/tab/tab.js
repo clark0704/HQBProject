@@ -6,7 +6,7 @@ import IconScreen from "../IconScreen";
 import ListItemScreen from "../ListItemScreen";
 import SocialIconScreen from "../SocialIconScreen";
 import homeScreen from "./homeScreen";
-import Images from "../../theme/Images";
+import Images from "../../utils/Images";
 
 
 export const tab = createBottomTabNavigator({

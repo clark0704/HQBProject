@@ -3,29 +3,17 @@ import {Image, StatusBar, StyleSheet, Text, View} from "react-native";
 
 import Swiper from 'react-native-swiper';
 import {deviceHeight, deviceWidth, scaleSize, setSpText} from "../../utils/DeviceUtils";
-import Colors from "../../theme/Colors";
+import Colors from "../../utils/Colors";
+import BaseBean from "../../utils/BaseBean";
+import moment from 'moment';
+import HttpUtils from "../../utils/HttpUtils";
 
 export default class homeScreen extends React.Component {
 
 
-
-    constructor(props){
+    constructor(props) {
         super(props);
 
-    }
-
-    componentDidMount() {
-
-        this._navListener = this.props.navigation.addListener('didFocus', () => {
-            StatusBar.setBarStyle('light-content',true); //主题色（ enum('default', 'light-content', 'dark-content')）
-            StatusBar.setBackgroundColor('#00000000');//状态栏的背景色 （Android 可用）
-            StatusBar.setHidden(false);//是否隐藏状态栏。
-            StatusBar.setTranslucent(true)//指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。
-        });
-    }
-
-    componentWillUnmount() {
-        this._navListener.remove();
     }
 
     render() {
@@ -38,7 +26,7 @@ export default class homeScreen extends React.Component {
                     autoplay={true}                //自动轮播
                     autoplayTimeout={2}                //每隔4秒切换
                     activeDot={<View style={{
-                        backgroundColor: 'blue',
+                        backgroundColor: '#BCBCBC',
                         width: 8,
                         height: 8,
                         borderRadius: 4,
@@ -53,17 +41,53 @@ export default class homeScreen extends React.Component {
                     <Image source={require('../../img/example.png')} style={styles.img}/>
                 </Swiper>
             </View>
-            <View style={ {flex:1,marginBottom:50,alignItems:"center"} }>
-                <View style={{backgroundColor:"white",flexGrow:1,width:deviceWidth,alignItems:"center",justifyContent:"center"}}>
-                    <Text > 账户资金由恒丰银行存管 </Text>
+            <View style={{flex: 1, marginBottom: 50, alignItems: "center"}}>
+                <View style={{
+                    backgroundColor: "white",
+                    flexGrow: 1,
+                    width: deviceWidth,
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                    <Text> 账户资金由恒丰银行存管 </Text>
                 </View>
-                <View style={{backgroundColor:Colors.color_bg,width:deviceWidth,alignItems:"center",padding:scaleSize(8)}}>
-                    <Text style={{fontSize:setSpText(10)}}> 账户资金由恒丰银行存管 </Text>
+                <View style={{
+                    backgroundColor: Colors.color_bg,
+                    width: deviceWidth,
+                    alignItems: "center",
+                    padding: scaleSize(8)
+                }}>
+                    <Text style={{fontSize: setSpText(10)}}> 账户资金由恒丰银行存管 </Text>
                 </View>
             </View>
         </View>
 
     }
+
+    //render渲染之后
+    componentDidMount() {
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBarStyle('light-content', true); //主题色（ enum('default', 'light-content', 'dark-content')）
+            StatusBar.setBackgroundColor('#00000000');//状态栏的背景色 （Android 可用）
+            StatusBar.setHidden(false);//是否隐藏状态栏。
+            StatusBar.setTranslucent(true)//指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。
+        });
+
+      const promise= HttpUtils.fetchRequest(BaseBean.homeSwipe,"POST","","index");
+
+        promise.then(jsonData=>{
+            console.debug("onSucess:"+JSON.stringify(jsonData))
+        }).catch(error=>{
+
+        })
+    }
+
+
+    componentWillUnmount() {
+        this._navListener.remove();
+    }
+
+
 }
 const styles = StyleSheet.create({
     container: {

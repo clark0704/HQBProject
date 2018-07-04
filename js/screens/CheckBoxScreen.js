@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image, Text, View} from 'react-native';
 
-import {styleSheet} from "../theme/Style";
+import {styleSheet} from "../utils/Style";
 import {CheckBox} from "react-native-elements";
 
 
