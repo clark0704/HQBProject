@@ -5,4 +5,5 @@ export default {
     // baseUrl: "https://www.hqblicai.com/",//正式站
 
     homeSwipe:"app/image.html",//首页轮播图
+    investList:"rest/borrow",//投资列表页
 }

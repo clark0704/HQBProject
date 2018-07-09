@@ -8,6 +8,7 @@ export const styleSheet = StyleSheet.create({
         alignItems:"center",
         width:deviceWidth,
         height:deviceHeight,
+        backgroundColor:"white"
     },
     loading: {
         height: deviceHeight,

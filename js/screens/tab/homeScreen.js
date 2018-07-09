@@ -1,19 +1,32 @@
 import React from "react";
-import {Image, StatusBar, StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, View,Platform,StatusBar} from "react-native";
 
 import Swiper from 'react-native-swiper';
-import {deviceHeight, deviceWidth, scaleSize, setSpText} from "../../utils/DeviceUtils";
+import {deviceHeight, deviceWidth, scaleSize} from "../../utils/DeviceUtils";
 import Colors from "../../utils/Colors";
 import BaseBean from "../../utils/BaseBean";
-import moment from 'moment';
 import HttpUtils from "../../utils/HttpUtils";
+import BaseComponent from "../BaseComponent";
 
-export default class homeScreen extends React.Component {
 
+export default class homeScreen extends BaseComponent {
 
     constructor(props) {
         super(props);
+        this.state = {
+            data: null,
+        }
+    }
 
+    //动态加载轮播图控件
+    loadImage() {
+        if (!this.state.data) {
+            return <Image source={require('../../img/example.png')} style={styles.img}/>;
+        } else {
+            return this.state.data.map((cur, index) => {
+                return <Image source={{uri: cur.img_url}} style={styles.img} key={index}/>;
+            })
+        }
     }
 
     render() {
@@ -21,33 +34,28 @@ export default class homeScreen extends React.Component {
 
             <View style={styles.wrapper}>
                 <Swiper
-                    height={scaleSize(200)}
+                    horizontal={true}
+                    height={scaleSize(600)}
+                    index={0}
                     loop={true}                    //如果设置为false，那么滑动到最后一张时，再次滑动将不会滑到第一张图片。
                     autoplay={true}                //自动轮播
-                    autoplayTimeout={2}                //每隔4秒切换
-                    activeDot={<View style={{
-                        backgroundColor: '#BCBCBC',
-                        width: 8,
-                        height: 8,
-                        borderRadius: 4,
-                        marginLeft: 3,
-                        marginRight: 3,
-                        marginTop: 3,
-                        marginBottom: 3
-                    }}/>}
-                >
-                    <Image source={require('../../img/example.png')} style={styles.img}/>
-                    <Image source={require('../../img/example.png')} style={styles.img}/>
-                    <Image source={require('../../img/example.png')} style={styles.img}/>
+                    autoplayDirection={true}
+                    showsPagination={true}
+                    dotColor="white"
+                    activeDotColor="#BCBCBC">
+                    {
+                        this.loadImage()
+                    }
                 </Swiper>
             </View>
-            <View style={{flex: 1, marginBottom: 50, alignItems: "center"}}>
+            <View style={{flex: 1, flexDirection:"column"}}>
                 <View style={{
+                    flex:1,
                     backgroundColor: "white",
-                    flexGrow: 1,
                     width: deviceWidth,
                     alignItems: "center",
-                    justifyContent: "center"
+                    justifyContent: "center",
+
                 }}>
                     <Text> 账户资金由恒丰银行存管 </Text>
                 </View>
@@ -55,44 +63,39 @@ export default class homeScreen extends React.Component {
                     backgroundColor: Colors.color_bg,
                     width: deviceWidth,
                     alignItems: "center",
+                    justifyContent:"center",
                     padding: scaleSize(8)
                 }}>
-                    <Text style={{fontSize: setSpText(10)}}> 账户资金由恒丰银行存管 </Text>
+                    <Text style={{fontSize: scaleSize(30)}}> 账户资金由恒丰银行存管 </Text>
                 </View>
             </View>
+
         </View>
 
     }
 
     //render渲染之后
     componentDidMount() {
-        this._navListener = this.props.navigation.addListener('didFocus', () => {
-            StatusBar.setBarStyle('light-content', true); //主题色（ enum('default', 'light-content', 'dark-content')）
-            StatusBar.setBackgroundColor('#00000000');//状态栏的背景色 （Android 可用）
-            StatusBar.setHidden(false);//是否隐藏状态栏。
-            StatusBar.setTranslucent(true)//指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。
-        });
+        super.componentDidMount();
 
-      const promise= HttpUtils.fetchRequest(BaseBean.homeSwipe,"POST","","index");
+        console.debug("----------------------------------------");
+        console.debug(Platform.Version);
 
-        promise.then(jsonData=>{
-            console.debug("onSucess:"+JSON.stringify(jsonData))
-        }).catch(error=>{
-
+        HttpUtils.fetchRequest(BaseBean.homeSwipe, "POST", "", "index")
+            .then(jsonData => {
+                this.setState({
+                    data: jsonData.information_list,
+                });
+            }).catch(error => {
+            console.debug("error:" + JSON.stringify(error))
         })
     }
-
-
-    componentWillUnmount() {
-        this._navListener.remove();
-    }
-
 
 }
 const styles = StyleSheet.create({
     container: {
         width: deviceWidth,
-        height: deviceHeight,
+        height: Platform.OS === "android"&& Platform.Version <21?deviceHeight-scaleSize(136)-StatusBar.currentHeight:deviceHeight-scaleSize(136),
         backgroundColor: "white",
     },
     wrapper: {

@@ -1,12 +1,13 @@
 import {createBottomTabNavigator} from 'react-navigation';
 import React from "react";
-import AvatarScreen from "../AvatarScreen";
 import {Image, StyleSheet, Text, View} from "react-native";
 import IconScreen from "../IconScreen";
 import ListItemScreen from "../ListItemScreen";
 import SocialIconScreen from "../SocialIconScreen";
 import homeScreen from "./homeScreen";
 import Images from "../../utils/Images";
+import InvestScreen from "./InvestScreen";
+import {scaleSize} from "../../utils/DeviceUtils";
 
 
 export const tab = createBottomTabNavigator({
@@ -17,21 +18,21 @@ export const tab = createBottomTabNavigator({
                     tabBarIcon: ({tintColor}) => (
                         <Image
                             source={Images.tab_home}
-                            style={{height: 24, width: 24, tintColor: tintColor}}
+                            style={{height: scaleSize(60), width: scaleSize(60), tintColor: tintColor}}
                         />
                     ),
                     allowFontScaling: false,
                 }
             )
         },
-        AvatarScreen: {
-            screen: AvatarScreen,
+        InvestScreen: {
+            screen: InvestScreen,
             navigationOptions: ({navigation}) => ({
                     tabBarLabel: '投资',
                     tabBarIcon: ({tintColor}) => (
                         <Image
                             source={Images.tab_invest}
-                            style={{height: 24, width: 24, tintColor: tintColor}}
+                            style={{height: scaleSize(60), width: scaleSize(60), tintColor: tintColor}}
                         />),
 
                 }
@@ -46,7 +47,7 @@ export const tab = createBottomTabNavigator({
 
                             <Image
                                 source={Images.tab_discovery}
-                                style={{alignSelf: 'center', width: 24, height: 24, tintColor: tintColor}}
+                                style={{alignSelf: 'center', width: scaleSize(60), height: scaleSize(60), tintColor: tintColor}}
                             />
                             <View style={style.corner}>
                                 <Text style={style.number}>{navigation.getParam("badge",0)}</Text>
@@ -54,7 +55,7 @@ export const tab = createBottomTabNavigator({
 
                         </View> :   <Image
                             source={Images.tab_discovery}
-                            style={{alignSelf: 'center', width: 24, height: 24, tintColor: tintColor}}
+                            style={{alignSelf: 'center', width: scaleSize(60), height: scaleSize(60), tintColor: tintColor}}
                         />                    ),
                 }
             )
@@ -66,7 +67,7 @@ export const tab = createBottomTabNavigator({
                     tabBarIcon: ({tintColor}) => (
                         <Image
                             source={Images.tab_account}
-                            style={[{height: 24, width: 24}, {tintColor: tintColor}]}
+                            style={[{height: scaleSize(60), width: scaleSize(60)}, {tintColor: tintColor}]}
                         />)
                 }
             )
@@ -78,7 +79,7 @@ export const tab = createBottomTabNavigator({
                     tabBarIcon: ({tintColor}) => (
                         <Image
                             source={Images.tab_mine}
-                            style={[{height: 24, width: 24}, {tintColor: tintColor}]}
+                            style={[{height: scaleSize(60), width: scaleSize(60)}, {tintColor: tintColor}]}
                         />),
                 }
             )
@@ -94,20 +95,20 @@ export const tab = createBottomTabNavigator({
             inactiveTintColor: '#555555',
             showIcon: true,//是否显示图标，默认关闭
             showLabel: true,//是否显示label，默认开启
-            style: {backgroundColor: '#ffffff',},
+            style: {backgroundColor: 'white',height:scaleSize(136)},
             indicatorStyle: {//标签指示器的样式对象（选项卡底部的行）。安卓底部会多出一条线，可以将height设置为0来暂时解决这个问题
                 height: 0,
             },
             labelStyle: {
-                fontSize: 12, // 文字大小
-                marginTop: 2,
+                fontSize: scaleSize(30), // 文字大小
+                marginTop: scaleSize(6),
                 marginBottom: 0,
             },
             iconStyle: {//图标的样式
                 marginBottom: 0,
             },
             tabStyle: {
-                backgroundColor: "white"
+                backgroundColor: "white",
             },
         }
 
@@ -117,27 +118,27 @@ export const tab = createBottomTabNavigator({
 const style = StyleSheet.create({
     container: {
         //backgroundColor:'#b2ffff',
-        width: 35,
-        height: 35,
+        width: scaleSize(100),
+        height: scaleSize(100),
         justifyContent: 'center',
     },
     icon: {
         alignSelf: 'center',
-        width: 20,
-        height: 20,
+        width: scaleSize(60),
+        height: scaleSize(60),
     },
     number: {
-        width: 12,
-        height: 12,
-        borderRadius: 6,
-        paddingLeft: 4,
+        width: scaleSize(36),
+        height: scaleSize(36),
+        borderRadius: scaleSize(18),
+        paddingLeft: scaleSize(11),
         alignSelf: "center",
-        fontSize: 8,
+        fontSize: scaleSize(24),
         color: 'white',
         backgroundColor: '#ff6b6d',
     },
     corner: {
         position: "absolute",
-        right: -5, top: 2,
+        right: -scaleSize(15), top: scaleSize(6),
     }
 });

@@ -13,6 +13,7 @@ import ButtonGroupScreen from "./screens/ButtonGroupScreen";
 import CheckBoxScreen from "./screens/CheckBoxScreen";
 import {tab} from "./screens/tab/tab";
 import LoadingScreen from "./screens/LoadingScreen";
+import AvatarScreen from "./screens/AvatarScreen";
 
 const RootStack = createStackNavigator({
     ButtonScreen:{screen:ButtonScreen},
@@ -20,6 +21,7 @@ const RootStack = createStackNavigator({
     ButtonGroupScreen:{screen:ButtonGroupScreen},
     CheckBoxScreen:{screen:CheckBoxScreen},
     tab:{screen:tab},
+    AvatarScreen:{screen:AvatarScreen},
     LoadingScreen:{screen:LoadingScreen},
 },{
     initialRouteName: 'LoadingScreen',
