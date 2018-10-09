@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View, StyleSheet, ScrollView, StatusBar} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 
 export default class ButtonScreen extends Component{

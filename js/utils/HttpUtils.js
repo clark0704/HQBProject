@@ -11,7 +11,7 @@ const version = "3.4";
 
 export default {
 
-    fetchRequest(url, method, token="", fileds="",pagerSize="",page=0) {
+    fetchRequest(url, method, token="", filed="",pagerSize="",page=0) {
         const header = {
             'Accept': 'application/json',
             'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',//表单
@@ -25,8 +25,8 @@ export default {
         md.update(APP_SECRET + ts + "MD5" + version);
         md5.update(md.digest().toHex() + APP_KEY + token);
         body = body + "&signa=" + md5.digest().toHex().toUpperCase();
-        if (token !== null && token.length > 0) body = body + "&oauth_token=" + token;
-        if (fileds !== null && fileds.length > 0) body = body + "&fileds=" + fileds;
+        if (  token.length > 0) body = body + "&oauth_token=" + token;
+        if ( filed.length > 0) body = body + "&fileds=" + filed;
         if (pagerSize.length >0 )body = body + "&page_size="+pagerSize;
         if (page>0) body = body +"&page="+page;
 

@@ -22,7 +22,6 @@ export default class CheckBoxScreen extends Component {
                 checked={this.state.checked}
                 onPress={() => this.setState({checked: !this.state.checked})}
             />
-
             <CheckBox
                 center
                 title='Click Here'
